@@ -11,8 +11,8 @@ namespace ImDatesAsp.Controllers
 		private Models.RemindingContext db = new Models.RemindingContext();
 		public ActionResult Index()
 		{
-			var reminding = db.RemindedPersons.Where(x=>!x.LastName.StartsWith("V")).ToList();
-			return View(reminding);
+			//var reminding = db.RemindedPersons.Where(x=>!x.LastName.StartsWith("V")).ToList();
+			return View(/*reminding*/);
 		}
 
 		public ActionResult About()
