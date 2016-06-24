@@ -14,7 +14,7 @@ namespace ImDatesAsp.Controllers
 		private Models.RemindingContext db = new Models.RemindingContext();
 		public ActionResult Index()
 		{
-			JobStorage.Current = new SqlServerStorage("RemindingContext", new SqlServerStorageOptions { PrepareSchemaIfNecessary = true });
+			JobStorage.Current = new SqlServerStorage("DefaultConnection", new SqlServerStorageOptions { PrepareSchemaIfNecessary = true });
 			//var reminding = db.RemindedPersons.Where(x=>!x.LastName.StartsWith("V")).ToList();
 			return View(/*reminding*/);
 		}
