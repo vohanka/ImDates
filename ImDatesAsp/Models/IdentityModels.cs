@@ -5,6 +5,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using ImDatesAsp.Entities;
 using System.Collections.Generic;
+using Hangfire.SqlServer;
+using Hangfire;
 
 namespace ImDatesAsp.Models
 {
@@ -26,7 +28,8 @@ namespace ImDatesAsp.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-        }
+			JobStorage.Current = new SqlServerStorage("DefaultConnection", new SqlServerStorageOptions { PrepareSchemaIfNecessary = true });
+		}
 
         public static ApplicationDbContext Create()
         {

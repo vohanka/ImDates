@@ -18,7 +18,7 @@ namespace ImDatesAsp.Models
 		
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
-			JobStorage.Current = new SqlServerStorage("RemindingContext", new SqlServerStorageOptions { PrepareSchemaIfNecessary = true });
+			
 			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 		}
 	}
