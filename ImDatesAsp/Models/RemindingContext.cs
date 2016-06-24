@@ -1,4 +1,6 @@
-﻿using ImDatesAsp.Entities;
+﻿using Hangfire;
+using Hangfire.SqlServer;
+using ImDatesAsp.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,9 +16,9 @@ namespace ImDatesAsp.Models
 		public DbSet<RemindedPerson> RemindedPersons { get; set; }
 
 		
-
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
+			JobStorage.Current = new SqlServerStorage("RemindingContext", new SqlServerStorageOptions { PrepareSchemaIfNecessary = true });
 			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 		}
 	}
