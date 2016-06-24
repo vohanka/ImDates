@@ -9,6 +9,7 @@ namespace ImDatesAsp.Entities
 {
 	public class RemindedPerson
 	{
+		[Key]
 		[ScaffoldColumn(false)]
 		public int Id { get; set; }
 
@@ -40,7 +41,7 @@ namespace ImDatesAsp.Entities
 		[Display(Name = "Upozornění")]
 		public bool Notify { get; set; }
 
-		// Navigation properties
-		public virtual ApplicationUser User { get; set; }
+		//// Navigation properties
+		//public virtual ApplicationUser User { get; set; }
 	}
 }

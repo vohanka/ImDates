@@ -10,7 +10,7 @@ namespace ImDatesAsp.Models
 {
 	public class RemindingContext : DbContext
 	{
-		public DbSet<ApplicationUser> Users { get; set; }
+		//public DbSet<ApplicationUser> Users { get; set; }
 		public DbSet<RemindedPerson> RemindedPersons { get; set; }
 
 		
