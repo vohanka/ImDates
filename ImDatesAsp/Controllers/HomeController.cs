@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hangfire;
+using Hangfire.SqlServer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -12,6 +14,7 @@ namespace ImDatesAsp.Controllers
 		private Models.RemindingContext db = new Models.RemindingContext();
 		public ActionResult Index()
 		{
+			JobStorage.Current = new SqlServerStorage("RemindingContext", new SqlServerStorageOptions { PrepareSchemaIfNecessary = true });
 			//var reminding = db.RemindedPersons.Where(x=>!x.LastName.StartsWith("V")).ToList();
 			return View(/*reminding*/);
 		}
@@ -36,11 +39,17 @@ namespace ImDatesAsp.Controllers
 			return RedirectToAction("Index");
 		}
 
+		public ActionResult CronJob()
+		{
+			RecurringJob.AddOrUpdate(()=>SendEmail(), Cron.Minutely);
+			return RedirectToAction("Index");
+		}
+
 		public static void SendEmail()
 		{
 			// Compose a message
 			MailMessage mail = new MailMessage("vohanka.libor@gmail.com", "vohanka.libor@gmail.com");
-			mail.Subject = "Hello";
+			mail.Subject = "Date reminder" + DateTime.Now;
 			mail.Body = "Testing some Mailgun awesomness";
 
 			// Send it!
